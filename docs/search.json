@@ -1,5 +1,26 @@
 [
   {
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "Blog",
+    "section": "",
+    "text": "My first weeks in MDS\n\n\n\n\n\n\n\n\nSep 10, 2026\n\n\nPeter Kim\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Peter Kim",
+    "section": "",
+    "text": "Hello!\nI am from South Korea but moved to Vancouver after turning eight. I studied Cognitive Systems (Language stream) for my undergradate program at the University of British Columbia, and conducted Neuroscience research at the UBC Interactive Mind and Movement Lab before joining MDS.\nI hope to build a stronger technical foundation through the MDS program so that I can continue working responsibly and effectively with data in the healthcare sector, especially in Neuroimaging."
+  },
+  {
+    "objectID": "posts/first-weeks/index.html",
+    "href": "posts/first-weeks/index.html",
+    "title": "My first weeks in MDS",
+    "section": "",
+    "text": "New backpack from orientation!\n\n\nMy first week at MDS picked up quite quickly. The orientation flooded my mind with information, and though I knew this program was growing, I was quite surprised at how many members this cohort contained. Despite the size of the cohort, I was already meeting wonderful people I would walk with throughout my time at MDS.\nThe first week of classes flew by even faster. Many assignments to submit, several ways to submit them, and a growing list of things to remember for each class. But by the end of the week, I was feeling accomplished at how much I had learned already. It felt like I learned more in one week than my past summer before the program.\nNow, I’m feeling excited to continue learning and have a chance to test it with the upcoming quizzes. Hopefully that gives me a better understanding of how each block runs throughout the program!"
+  },
+  {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About",
@@ -26,12 +47,5 @@
     "title": "About",
     "section": "Outside of data science",
     "text": "Outside of data science\nWhen away from my laptop, I enjoy taking forest walks, Muay Thai, and solving logic puzzles. My favourite sports are badminton and basketball!"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Peter Kim",
-    "section": "",
-    "text": "Hello!\nI am from South Korea but moved to Vancouver after turning eight. I studied Cognitive Systems (Language stream) for my undergradate program at the University of British Columbia, and conducted Neuroscience research at the UBC Interactive Mind and Movement Lab before joining MDS.\nI hope to build a stronger technical foundation through the MDS program so that I can continue working responsibly and effectively with data in the healthcare sector, especially in Neuroimaging."
   }
 ]
