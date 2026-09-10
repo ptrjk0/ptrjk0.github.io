@@ -2,4 +2,15 @@
 title: "About"
 ---
 
-About this site
+## Background
+
+Entering into the Cognitive Systems program at UBC for my undergraduate program, I knew I wanted to work
+interchangably between multiple domains such as Linguistics and Computer Science, but I was unsure what that would practically look like. I realized through my research experience (introduced below) that a particular way this could be done was through research in healthcare involving machine learning with neural data. Since then, my research interest has been in neuroimaging methods, and this program is a significant part of this journey.
+
+## Why data science?
+
+In my final year of undergrad, I joined the Interactive Mind and Movement Lab for a capstone project that involved empirically comparing neuroimaging methods for their effectiveness and validity. Through this project I quickly realized a solid technical foundation was essential for conducting responsible, informed research that could meaningfully contribute to furthering these methods. That realization has drawn me to data science as a displine and the MDS program, which aims to establish responsible and reproducible workflows involving data. 
+
+## Outside of data science
+
+When away from my laptop, I enjoy taking forest walks, Muay Thai, and solving logic puzzles. My favourite sports are badminton and basketball!

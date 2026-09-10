@@ -1,7 +1,14 @@
 ---
-title: "website"
+title: "Peter Kim"
+about:
+  template: jolla
+  image: images/profile_img.jpg
 ---
 
-This is a Quarto website.
+Hello! 
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+I am from South Korea but moved to Vancouver after turning eight. I studied Cognitive Systems (Language stream) for my undergradate program at the University of British Columbia, and conducted Neuroscience research at the UBC Interactive Mind and Movement Lab before joining MDS. 
+
+I hope to build a stronger technical foundation through the MDS program so that I can continue working responsibly and effectively with data in the healthcare sector, especially in Neuroimaging. 
+
+
