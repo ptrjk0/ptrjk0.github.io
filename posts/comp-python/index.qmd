@@ -1,0 +1,5 @@
+---
+title: "Python Computational Post"
+author: "Peter Kim"
+date: 2026-09-24
+---

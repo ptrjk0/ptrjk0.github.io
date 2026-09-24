@@ -1,0 +1,10 @@
+[project]
+name = "ptrjk0-github-io"
+version = "0.1.0"
+requires-python = ">=3.14"
+dependencies = [
+    "gapminder>=0.1",
+    "ipykernel>=7.3.0",
+    "jupyter>=1.1.1",
+    "pandas>=3.0.6",
+]

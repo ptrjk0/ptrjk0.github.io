@@ -2,6 +2,8 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/comp-python/index.html",
+      "/posts/comp-r/index.html",
       "/posts/first-weeks/index.html"
     ]
   }
