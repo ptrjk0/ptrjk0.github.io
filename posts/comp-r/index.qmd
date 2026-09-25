@@ -1,5 +1,93 @@
 ---
-title: "R Computational Post"
+title: "R Computational Post: Continent Life Expectancy"
 author: "Peter Kim"
 date: 2026-09-24
 ---
+
+Data: [Gapminder](https://jennybc.github.io/gapminder/) Citation: Bryan J (2025). gapminder: Data from Gapminder. R package version 1.0.1. Licensed under CC0
+
+```{r}
+#| label: setup
+#| warning: false
+#| message: false
+
+library(gapminder)
+library(tidyverse)
+```
+
+Setting up, loading required libraries.
+
+```{r}
+#| label: explore
+glimpse(gapminder)
+
+# Coverage: how many countries, which years, any missing values?
+data_explore <- gapminder |>
+  summarise(
+    n_rows = n(),
+    n_countries = n_distinct(country),
+    first_year = min(year),
+    last_year = max(year),
+    missing_values = sum(is.na(gapminder))
+  )
+
+data_explore
+```
+
+First, we explore the data. The question I want to answer is: "How much life expectancy increase do we observe per continent?" This would be over the course 
+of the dataset's data collection range, which is shown to be 55 years, 
+from 1952 to 2007.
+
+```{r}
+#| label: continents
+# Countries per continent (counted in one year so each country appears once)
+gap_continent <- gapminder |>
+  filter(year == 2007) |>
+  count(continent, name = "n_countries")
+
+gap_continent
+```
+
+Checking how many countries there are per continent.
+
+```{r}
+#| label: wrangle
+# Median life expectancy per continent per survey year (used in the figure)
+lifeexp_by_continent <- gapminder |>
+  group_by(continent, year) |>
+  summarise(
+    median_lifeExp = median(lifeExp),
+    n_countries = n(),
+    .groups = "drop"
+  )
+
+# Change in the median from the first to the last survey year
+lifeexp_change <- lifeexp_by_continent |>
+  group_by(continent) |>
+  summarise(
+    median_1952 = median_lifeExp[year == 1952],
+    median_2007 = median_lifeExp[year == 2007],
+    gain_years = median_2007 - median_1952
+  ) |>
+  arrange(desc(gain_years))
+
+lifeexp_change
+```
+
+This dataframe shows the median life expectancy in each continent in 1952, and in 2007 which is 55 years later. It also shows how much the life expectancy incrased over the period of 55 years.
+
+```{r}
+#| label: fig-lifeexp-trend
+#| fig-cap: "Median life expectancy by continent, 1952–2007."
+ggplot(lifeexp_by_continent, aes(x = year, y = median_lifeExp, colour = continent)) +
+  geom_line() +
+  geom_point() +
+  labs(
+    x = "Year",
+    y = "Median life expectancy (years)",
+    colour = "Continent"
+  )
+```
+
+To visualize our results, his is a line graph showing the growth in median life expectancy by continent. It plots the We observe that Oceania maintains 
+the highest median life expectancy, but also very high growth in Asia, to almost catch up to the Americas.
