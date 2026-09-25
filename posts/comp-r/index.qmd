@@ -4,7 +4,9 @@ author: "Peter Kim"
 date: 2026-09-24
 ---
 
-Data: [Gapminder](https://jennybc.github.io/gapminder/) Citation: Bryan J (2025). gapminder: Data from Gapminder. R package version 1.0.1. Licensed under CC0
+Data: [Gapminder](https://jennybc.github.io/gapminder/)
+
+Citation: Bryan J (2025). gapminder: Data from Gapminder. R package version 1.0.1. Licensed under CC0.
 
 ```{r}
 #| label: setup
@@ -34,9 +36,7 @@ data_explore <- gapminder |>
 data_explore
 ```
 
-First, we explore the data. The question I want to answer is: "How much life expectancy increase do we observe per continent?" This would be over the course 
-of the dataset's data collection range, which is shown to be 55 years, 
-from 1952 to 2007.
+First, we explore the data. The question I want to answer is: "How much life expectancy increase do we observe per continent?" This would be over the course of the dataset's data collection range, which is shown to be 55 years, from 1952 to 2007.
 
 ```{r}
 #| label: continents
@@ -89,5 +89,4 @@ ggplot(lifeexp_by_continent, aes(x = year, y = median_lifeExp, colour = continen
   )
 ```
 
-To visualize our results, his is a line graph showing the growth in median life expectancy by continent. It plots the We observe that Oceania maintains 
-the highest median life expectancy, but also very high growth in Asia, to almost catch up to the Americas.
+To visualize our results, his is a line graph showing the growth in median life expectancy by continent. It plots the We observe that Oceania maintains the highest median life expectancy, but also very high growth in Asia, to almost catch up to the Americas.
