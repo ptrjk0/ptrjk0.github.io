@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Peter Kim">
-<meta name="dcterms.date" content="2026-09-24">
+<meta name="dcterms.date" content="2026-09-25">
 
-<title>Python Computational Post – Peter Kim</title>
+<title>Python Computational Post: – Peter Kim</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -28,10 +28,45 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -75,6 +110,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 <link rel="stylesheet" href="../../styles.css">
@@ -120,15 +158,21 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link active" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Python Computational Post</h1>
+<h1 class="title">Python Computational Post:</h1>
 </div>
 
 
@@ -145,7 +189,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 24, 2026</p>
+      <p class="date">September 25, 2026</p>
     </div>
   </div>
   
@@ -157,11 +201,217 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>#| label: python-figure #| fig-cap: “figure for python”</p>
-<pre><code>{python}
-</code></pre>
+<p>Data: <a href="https://jennybc.github.io/gapminder/">gapminder</a> by Jennifer Bryan (CC0), read from the package’s <a href="https://raw.githubusercontent.com/jennybc/gapminder/refs/heads/main/inst/extdata/gapminder.tsv">TSV file on GitHub</a>. Based on free material from <a href="https://www.gapminder.org/data/">GAPMINDER.ORG</a>, CC-BY LICENSE.</p>
+<div id="setup" class="cell" data-message="false" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/jennybc/gapminder/refs/heads/main/inst/extdata/gapminder.tsv"</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>gapminder <span class="op">=</span> pd.read_csv(url, sep<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Setting up, loading required libraries. The dataset is loaded from GitHub through a URL. Internet connection is required for loading the data.</p>
+<div id="explore-data" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>gapminder.info()</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Coverage: how many countries, which years, any missing values?</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>coverage <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"n_rows"</span>: [<span class="bu">len</span>(gapminder)],</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"n_countries"</span>: [gapminder[<span class="st">"country"</span>].nunique()],</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"first_year"</span>: [gapminder[<span class="st">"year"</span>].<span class="bu">min</span>()],</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"last_year"</span>: [gapminder[<span class="st">"year"</span>].<span class="bu">max</span>()],</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"missing_values"</span>: [gapminder.isna().<span class="bu">sum</span>().<span class="bu">sum</span>()],</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>display(coverage)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Does every country have all survey years? (needed to compare 1952 with 2007)</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    gapminder.groupby(<span class="st">"country"</span>)[<span class="st">"year"</span>]</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    .count()</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    .value_counts()</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    .rename_axis(<span class="st">"years_per_country"</span>)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    .reset_index(name<span class="op">=</span><span class="st">"n_countries"</span>)</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'pandas.DataFrame'&gt;
+RangeIndex: 1704 entries, 0 to 1703
+Data columns (total 6 columns):
+ #   Column     Non-Null Count  Dtype  
+---  ------     --------------  -----  
+ 0   country    1704 non-null   str    
+ 1   continent  1704 non-null   str    
+ 2   year       1704 non-null   int64  
+ 3   lifeExp    1704 non-null   float64
+ 4   pop        1704 non-null   int64  
+ 5   gdpPercap  1704 non-null   float64
+dtypes: float64(2), int64(2), str(2)
+memory usage: 80.0 KB</code></pre>
+</div>
+<div id="explore-data-1" class="cell-output cell-output-display">
+<div>
 
 
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">n_rows</th>
+<th data-quarto-table-cell-role="th">n_countries</th>
+<th data-quarto-table-cell-role="th">first_year</th>
+<th data-quarto-table-cell-role="th">last_year</th>
+<th data-quarto-table-cell-role="th">missing_values</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>1704</td>
+<td>142</td>
+<td>1952</td>
+<td>2007</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<div id="explore-data-2" class="cell-output cell-output-display" data-execution_count="2">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">years_per_country</th>
+<th data-quarto-table-cell-role="th">n_countries</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>12</td>
+<td>142</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>First, we explore the data. The dataset has 1,704 rows and six columns: country, continent, year, life expectancy, population, and GDP per capita. It covers 142 countries surveyed every five years from 1952 to 2007, and there are no missing values. The last table confirms that every country appears in all 12 survey years, so each country has both a 1952 and a 2007 value to compare. GDP per capita is measured in inflation-adjusted international dollars, which makes values comparable across countries and years.</p>
+<div id="cell-wrangle-data" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># One row per country, one column per year, values = GDP per capita</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>gdp_wide <span class="op">=</span> gapminder.pivot(index<span class="op">=</span><span class="st">"country"</span>, columns<span class="op">=</span><span class="st">"year"</span>, values<span class="op">=</span><span class="st">"gdpPercap"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Growth from 1952 to 2007 for every country</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>growth <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"continent"</span>: gapminder.groupby(<span class="st">"country"</span>)[<span class="st">"continent"</span>].first(),</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"gdp_1952"</span>: gdp_wide[<span class="dv">1952</span>],</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"gdp_2007"</span>: gdp_wide[<span class="dv">2007</span>],</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>growth[<span class="st">"growth_pct"</span>] <span class="op">=</span> (growth[<span class="st">"gdp_2007"</span>] <span class="op">/</span> growth[<span class="st">"gdp_1952"</span>] <span class="op">-</span> <span class="dv">1</span>) <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Top 5 countries by percentage growth</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>top5 <span class="op">=</span> growth.sort_values(<span class="st">"growth_pct"</span>, ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">5</span>).<span class="bu">round</span>(<span class="dv">1</span>)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>top5</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="wrangle-data" class="cell-output cell-output-display" data-execution_count="3">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">continent</th>
+<th data-quarto-table-cell-role="th">gdp_1952</th>
+<th data-quarto-table-cell-role="th">gdp_2007</th>
+<th data-quarto-table-cell-role="th">growth_pct</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">country</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Equatorial Guinea</th>
+<td>Africa</td>
+<td>375.6</td>
+<td>12154.1</td>
+<td>3135.5</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Taiwan</th>
+<td>Asia</td>
+<td>1206.9</td>
+<td>28718.3</td>
+<td>2279.4</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Korea, Rep.</th>
+<td>Asia</td>
+<td>1030.6</td>
+<td>23348.1</td>
+<td>2165.5</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Singapore</th>
+<td>Asia</td>
+<td>2315.1</td>
+<td>47143.2</td>
+<td>1936.3</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Botswana</th>
+<td>Africa</td>
+<td>851.2</td>
+<td>12569.9</td>
+<td>1376.6</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>The five countries with the highest growth are Equatorial Guinea, Taiwan, South Korea, Singapore, and Botswana. Equatorial Guinea stands well ahead of the rest: its GDP per capita in 2007 was about 32 times its 1952 level. Taiwan and South Korea each grew roughly 23 to 24 times, Singapore about 20 times, and Botswana about 15 times. Three of the five are in East and Southeast Asia and two are in Africa. Most of these countries started from a low GDP per capita in 1952; Singapore started higher and still ranks fourth.</p>
+<div id="cell-fig-gdp-growth-python" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>top5_data <span class="op">=</span> gapminder[gapminder[<span class="st">"country"</span>].isin(top5.index)].copy()</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>top5_data[<span class="st">"gdp_index"</span>] <span class="op">=</span> top5_data[<span class="st">"gdpPercap"</span>] <span class="op">/</span> top5_data[<span class="st">"country"</span>].<span class="bu">map</span>(growth[<span class="st">"gdp_1952"</span>])</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">5</span>))</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> country <span class="kw">in</span> top5.index:</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    country_data <span class="op">=</span> top5_data[top5_data[<span class="st">"country"</span>] <span class="op">==</span> country]</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    ax.plot(country_data[<span class="st">"year"</span>], country_data[<span class="st">"gdp_index"</span>], marker<span class="op">=</span><span class="st">"o"</span>, label<span class="op">=</span>country)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>ax.axhline(<span class="dv">1</span>, color<span class="op">=</span><span class="st">"grey"</span>, linestyle<span class="op">=</span><span class="st">"--"</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Year"</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"GDP per capita relative to 1952 (1952 = 1)"</span>)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>ax.legend(title<span class="op">=</span><span class="st">"Country"</span>)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-gdp-growth-python" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-gdp-growth-python-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-gdp-growth-python-output-1.png" width="660" height="430" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gdp-growth-python-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: GDP per capita relative to 1952 for the five countries with the highest growth, 1952–2007. A value of 10 means ten times the 1952 level.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="#fig-gdp-growth-python" class="quarto-xref">Figure&nbsp;1</a> shows two different routes to the top five. Taiwan, South Korea, and Singapore grew steadily from the 1960s onward, with growth building on itself over four decades. Botswana followed a similar path starting in the late 1960s. Equatorial Guinea looks very different: its GDP per capita barely moved for forty years, and nearly all of its growth came after 1992, when it rose from about three times its 1952 level to over thirty times by 2007.</p>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>Equatorial Guinea, Taiwan, South Korea, Singapore, and Botswana had the highest growth in GDP per capita between 1952 and 2007.</p>
+
+
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
