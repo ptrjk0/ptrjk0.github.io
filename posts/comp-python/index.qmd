@@ -4,10 +4,9 @@ author: "Peter Kim"
 date: 2026-09-25
 ---
 
-Data: [gapminder](https://jennybc.github.io/gapminder/) by Jennifer Bryan (CC0),
-read from the package's
-[TSV file on GitHub](https://raw.githubusercontent.com/jennybc/gapminder/refs/heads/main/inst/extdata/gapminder.tsv).
-Based on free material from [GAPMINDER.ORG](https://www.gapminder.org/data/), CC-BY LICENSE.
+Data: [gapminder](https://jennybc.github.io/gapminder/) by Jennifer Bryan (CC0), read from the package's [TSV file on GitHub](https://raw.githubusercontent.com/jennybc/gapminder/refs/heads/main/inst/extdata/gapminder.tsv). Based on free material from [GAPMINDER.ORG](https://www.gapminder.org/data/), CC-BY LICENSE.
+
+## Setup
 
 ```{python}
 #| label: setup
@@ -22,6 +21,8 @@ gapminder = pd.read_csv(url, sep="\t")
 ```
 
 Setting up, loading required libraries. The dataset is loaded from GitHub through a URL, so internet connection is required for loading the data.
+
+## Exploring the Data
 
 ```{python}
 #| label: explore-data
@@ -47,13 +48,9 @@ display(coverage)
 )
 ```
 
-First, we explore the data. The dataset has 1,704 rows and six columns: country, continent, year, life
-expectancy, population, and GDP per capita. It covers 142 countries surveyed
-every five years from 1952 to 2007, and there are no missing values. The last
-table confirms that every country appears in all 12 survey years, so each
-country has both a 1952 and a 2007 value to compare. GDP per capita is
-measured in inflation-adjusted international dollars, which makes values
-comparable across countries and years.
+First, we explore the data. The dataset has 1,704 rows and six columns: country, continent, year, life expectancy, population, and GDP per capita. It covers 142 countries surveyed every five years from 1952 to 2007, and there are no missing values. The last table confirms that every country appears in all 12 survey years, so each country has both a 1952 and a 2007 value to compare. GDP per capita is measured in inflation-adjusted international dollars, which makes values comparable across countries and years.
+
+## GDP per Capita Growth by Country
 
 ```{python}
 #| label: wrangle-data
@@ -73,13 +70,9 @@ top5 = growth.sort_values("growth_pct", ascending=False).head(5).round(1)
 top5
 ```
 
-The five countries with the highest growth are Equatorial Guinea, Taiwan,
-South Korea, Singapore, and Botswana. Equatorial Guinea displays the largest growth by far: 
-its GDP per capita in 2007 was about 32 times its 1952 level.
-Taiwan and South Korea each grew roughly 23 to 24 times, Singapore about 20
-times, and Botswana about 15 times. Three of the five are in East and
-Southeast Asia and two are in Africa. Most of these countries started from a
-low GDP per capita in 1952; Singapore started higher and still ranks fourth.
+The five countries with the highest growth are Equatorial Guinea, Taiwan, South Korea, Singapore, and Botswana. Equatorial Guinea displays the largest growth by far: its GDP per capita in 2007 was about 32 times its 1952 level. Taiwan and South Korea each grew roughly 23 to 24 times, Singapore about 20 times, and Botswana about 15 times. Three of the five are in East and Southeast Asia and two are in Africa. Most of these countries started from a low GDP per capita in 1952; Singapore started higher and still ranks fourth.
+
+## Visualizing the Growth
 
 ```{python}
 #| label: fig-gdp-growth-python
@@ -98,15 +91,8 @@ ax.legend(title="Country")
 plt.show()
 ```
 
-@fig-gdp-growth-python shows two different routes to the top five. Taiwan, South
-Korea, and Singapore grew steadily from the 1960s onward, with growth
-building on itself over four decades. Botswana followed a similar path
-starting in the late 1960s. Equatorial Guinea looks very different: its GDP
-per capita barely moved for forty years, and nearly all of its growth came
-after 1992, when it rose from about three times its 1952 level to over
-thirty times by 2007.
+@fig-gdp-growth-python shows two different routes to the top five. Taiwan, South Korea, and Singapore grew steadily from the 1960s onward, with growth building on itself over four decades. Botswana followed a similar path starting in the late 1960s. Equatorial Guinea looks very different: its GDP per capita barely moved for forty years, and nearly all of its growth came after 1992, when it rose from about three times its 1952 level to over thirty times by 2007.
 
 ## Conclusion
 
-Equatorial Guinea, Taiwan, South Korea, Singapore, and Botswana had the
-highest growth in GDP per capita between 1952 and 2007.
+Equatorial Guinea, Taiwan, South Korea, Singapore, and Botswana had the highest growth in GDP per capita between 1952 and 2007.

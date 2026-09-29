@@ -6,6 +6,8 @@ date: 2026-09-24
 
 Data: [gapminder](https://jennybc.github.io/gapminder/) R package by Jennifer Bryan (CC0). Based on free material from [GAPMINDER.ORG](https://www.gapminder.org/data/), CC-BY LICENSE.
 
+## Setup
+
 ```{r}
 #| label: setup
 #| warning: false
@@ -16,6 +18,8 @@ library(tidyverse)
 ```
 
 Setting up, loading required libraries.
+
+## Exploring the Data
 
 ```{r}
 #| label: explore
@@ -35,6 +39,8 @@ data_explore
 ```
 
 First, we explore the data. The question I want to answer is: "How much life expectancy increase do we observe per continent?" This would be over the course of the dataset's data collection range, which is shown to be 55 years, from 1952 to 2007.
+
+## Life Expectancy Change by Continent
 
 ```{r}
 #| label: continents
@@ -74,6 +80,8 @@ lifeexp_change
 
 This dataframe shows the median life expectancy in each continent in 1952, and in 2007 which is 55 years later. It also shows how much the life expectancy increased over the period of 55 years.
 
+## Visualizing the Trend
+
 ```{r}
 #| label: fig-lifeexp-trend
 #| fig-cap: "Median life expectancy by continent, 1952–2007."
@@ -91,6 +99,4 @@ To visualize our results, @fig-lifeexp-trend is a line graph showing the growth 
 
 ## Conclusion
 
-Asia had the largest increase in median life expectancy between 1952 and
-2007, gaining about 27.5 years. The Americas followed with about 18 years,
-then Africa (14), Europe (13), and Oceania (11.5).
+Asia had the largest increase in median life expectancy between 1952 and 2007, gaining about 27.5 years. The Americas followed with about 18 years, then Africa (14), Europe (13), and Oceania (11.5).

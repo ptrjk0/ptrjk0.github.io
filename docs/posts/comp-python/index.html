@@ -163,7 +163,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link active" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#exploring-the-data" id="toc-exploring-the-data" class="nav-link" data-scroll-target="#exploring-the-data">Exploring the Data</a></li>
+  <li><a href="#gdp-per-capita-growth-by-country" id="toc-gdp-per-capita-growth-by-country" class="nav-link" data-scroll-target="#gdp-per-capita-growth-by-country">GDP per Capita Growth by Country</a></li>
+  <li><a href="#visualizing-the-growth" id="toc-visualizing-the-growth" class="nav-link" data-scroll-target="#visualizing-the-growth">Visualizing the Growth</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
 </nav>
     </div>
@@ -202,6 +206,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>Data: <a href="https://jennybc.github.io/gapminder/">gapminder</a> by Jennifer Bryan (CC0), read from the package’s <a href="https://raw.githubusercontent.com/jennybc/gapminder/refs/heads/main/inst/extdata/gapminder.tsv">TSV file on GitHub</a>. Based on free material from <a href="https://www.gapminder.org/data/">GAPMINDER.ORG</a>, CC-BY LICENSE.</p>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
 <div id="setup" class="cell" data-message="false" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -210,6 +216,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>gapminder <span class="op">=</span> pd.read_csv(url, sep<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Setting up, loading required libraries. The dataset is loaded from GitHub through a URL, so internet connection is required for loading the data.</p>
+</section>
+<section id="exploring-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="exploring-the-data">Exploring the Data</h2>
 <div id="explore-data" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>gapminder.info()</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -300,6 +309,9 @@ memory usage: 80.0 KB</code></pre>
 </div>
 </div>
 <p>First, we explore the data. The dataset has 1,704 rows and six columns: country, continent, year, life expectancy, population, and GDP per capita. It covers 142 countries surveyed every five years from 1952 to 2007, and there are no missing values. The last table confirms that every country appears in all 12 survey years, so each country has both a 1952 and a 2007 value to compare. GDP per capita is measured in inflation-adjusted international dollars, which makes values comparable across countries and years.</p>
+</section>
+<section id="gdp-per-capita-growth-by-country" class="level2">
+<h2 class="anchored" data-anchor-id="gdp-per-capita-growth-by-country">GDP per Capita Growth by Country</h2>
 <div id="cell-wrangle-data" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># One row per country, one column per year, values = GDP per capita</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>gdp_wide <span class="op">=</span> gapminder.pivot(index<span class="op">=</span><span class="st">"country"</span>, columns<span class="op">=</span><span class="st">"year"</span>, values<span class="op">=</span><span class="st">"gdpPercap"</span>)</span>
@@ -379,6 +391,9 @@ memory usage: 80.0 KB</code></pre>
 </div>
 </div>
 <p>The five countries with the highest growth are Equatorial Guinea, Taiwan, South Korea, Singapore, and Botswana. Equatorial Guinea displays the largest growth by far: its GDP per capita in 2007 was about 32 times its 1952 level. Taiwan and South Korea each grew roughly 23 to 24 times, Singapore about 20 times, and Botswana about 15 times. Three of the five are in East and Southeast Asia and two are in Africa. Most of these countries started from a low GDP per capita in 1952; Singapore started higher and still ranks fourth.</p>
+</section>
+<section id="visualizing-the-growth" class="level2">
+<h2 class="anchored" data-anchor-id="visualizing-the-growth">Visualizing the Growth</h2>
 <div id="cell-fig-gdp-growth-python" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>top5_data <span class="op">=</span> gapminder[gapminder[<span class="st">"country"</span>].isin(top5.index)].copy()</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>top5_data[<span class="st">"gdp_index"</span>] <span class="op">=</span> top5_data[<span class="st">"gdpPercap"</span>] <span class="op">/</span> top5_data[<span class="st">"country"</span>].<span class="bu">map</span>(growth[<span class="st">"gdp_1952"</span>])</span>
@@ -406,6 +421,7 @@ Figure&nbsp;1: GDP per capita relative to 1952 for the five countries with the h
 </div>
 </div>
 <p><a href="#fig-gdp-growth-python" class="quarto-xref">Figure&nbsp;1</a> shows two different routes to the top five. Taiwan, South Korea, and Singapore grew steadily from the 1960s onward, with growth building on itself over four decades. Botswana followed a similar path starting in the late 1960s. Equatorial Guinea looks very different: its GDP per capita barely moved for forty years, and nearly all of its growth came after 1992, when it rose from about three times its 1952 level to over thirty times by 2007.</p>
+</section>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
 <p>Equatorial Guinea, Taiwan, South Korea, Singapore, and Botswana had the highest growth in GDP per capita between 1952 and 2007.</p>

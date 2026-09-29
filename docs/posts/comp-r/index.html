@@ -160,7 +160,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link active" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#exploring-the-data" id="toc-exploring-the-data" class="nav-link" data-scroll-target="#exploring-the-data">Exploring the Data</a></li>
+  <li><a href="#life-expectancy-change-by-continent" id="toc-life-expectancy-change-by-continent" class="nav-link" data-scroll-target="#life-expectancy-change-by-continent">Life Expectancy Change by Continent</a></li>
+  <li><a href="#visualizing-the-trend" id="toc-visualizing-the-trend" class="nav-link" data-scroll-target="#visualizing-the-trend">Visualizing the Trend</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
 </nav>
     </div>
@@ -199,11 +203,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>Data: <a href="https://jennybc.github.io/gapminder/">gapminder</a> R package by Jennifer Bryan (CC0). Based on free material from <a href="https://www.gapminder.org/data/">GAPMINDER.ORG</a>, CC-BY LICENSE.</p>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gapminder)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Setting up, loading required libraries.</p>
+</section>
+<section id="exploring-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="exploring-the-data">Exploring the Data</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(gapminder)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -235,6 +244,9 @@ $ gdpPercap &lt;dbl&gt; 779.4453, 820.8530, 853.1007, 836.1971, 739.9811, 786.11
 </div>
 </div>
 <p>First, we explore the data. The question I want to answer is: “How much life expectancy increase do we observe per continent?” This would be over the course of the dataset’s data collection range, which is shown to be 55 years, from 1952 to 2007.</p>
+</section>
+<section id="life-expectancy-change-by-continent" class="level2">
+<h2 class="anchored" data-anchor-id="life-expectancy-change-by-continent">Life Expectancy Change by Continent</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Countries per continent (counted in one year so each country appears once)</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>gap_continent <span class="ot">&lt;-</span> gapminder <span class="sc">|&gt;</span></span>
@@ -287,6 +299,9 @@ $ gdpPercap &lt;dbl&gt; 779.4453, 820.8530, 853.1007, 836.1971, 739.9811, 786.11
 </div>
 </div>
 <p>This dataframe shows the median life expectancy in each continent in 1952, and in 2007 which is 55 years later. It also shows how much the life expectancy increased over the period of 55 years.</p>
+</section>
+<section id="visualizing-the-trend" class="level2">
+<h2 class="anchored" data-anchor-id="visualizing-the-trend">Visualizing the Trend</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(lifeexp_by_continent, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> median_lifeExp, <span class="at">colour =</span> continent)) <span class="sc">+</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
@@ -310,6 +325,7 @@ Figure&nbsp;1: Median life expectancy by continent, 1952–2007.
 </div>
 </div>
 <p>To visualize our results, <a href="#fig-lifeexp-trend" class="quarto-xref">Figure&nbsp;1</a> is a line graph showing the growth in median life expectancy by continent. It plots the median life expectancy of each continent at every survey year from 1952 to 2007. We observe that Oceania maintains the highest median life expectancy throughout, while Asia shows very high growth, almost catching up to the Americas by 2007.</p>
+</section>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
 <p>Asia had the largest increase in median life expectancy between 1952 and 2007, gaining about 27.5 years. The Americas followed with about 18 years, then Africa (14), Europe (13), and Oceania (11.5).</p>
