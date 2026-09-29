@@ -17,7 +17,7 @@ library(gapminder)
 library(tidyverse)
 ```
 
-Setting up, loading required libraries.
+Setting up, loading required libraries. The `message: false` and `warning: false` options hide the start-up messages tidyverse prints when it loads, which aren't part of the analysis.
 
 ## Exploring the Data
 

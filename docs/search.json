@@ -74,7 +74,7 @@
     "href": "posts/comp-r/index.html#setup",
     "title": "R Computational Post: Continent Life Expectancy",
     "section": "Setup",
-    "text": "Setup\n\nlibrary(gapminder)\nlibrary(tidyverse)\n\nSetting up, loading required libraries."
+    "text": "Setup\n\nlibrary(gapminder)\nlibrary(tidyverse)\n\nSetting up, loading required libraries. The message: false and warning: false options hide the start-up messages tidyverse prints when it loads, which aren’t part of the analysis."
   },
   {
     "objectID": "posts/comp-r/index.html#exploring-the-data",
