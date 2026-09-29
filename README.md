@@ -7,7 +7,7 @@ This repository contains the source for my personal website and blog, built with
 Install these tools before building the site. The versions listed are the ones I used.
 
 | Tool   | Version | Install from                                              |
-|------------------|----------------------|--------------------------------|
+|--------|---------|-----------------------------------------------------------|
 | Git    | 2.50.1  | <https://git-scm.com/downloads>                           |
 | Quarto | 1.10.18 | <https://quarto.org/docs/get-started/>                    |
 | uv     | 0.12.5  | <https://docs.astral.sh/uv/getting-started/installation/> |
