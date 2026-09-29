@@ -21,7 +21,7 @@ url = "https://raw.githubusercontent.com/jennybc/gapminder/refs/heads/main/inst/
 gapminder = pd.read_csv(url, sep="\t")
 ```
 
-Setting up, loading required libraries. The dataset is loaded from GitHub through a URL. Internet connection is required for loading the data.
+Setting up, loading required libraries. The dataset is loaded from GitHub through a URL, so internet connection is required for loading the data.
 
 ```{python}
 #| label: explore-data

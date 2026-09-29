@@ -72,7 +72,7 @@ lifeexp_change <- lifeexp_by_continent |>
 lifeexp_change
 ```
 
-This dataframe shows the median life expectancy in each continent in 1952, and in 2007 which is 55 years later. It also shows how much the life expectancy incrased over the period of 55 years.
+This dataframe shows the median life expectancy in each continent in 1952, and in 2007 which is 55 years later. It also shows how much the life expectancy increased over the period of 55 years.
 
 ```{r}
 #| label: fig-lifeexp-trend
@@ -87,4 +87,10 @@ ggplot(lifeexp_by_continent, aes(x = year, y = median_lifeExp, colour = continen
   )
 ```
 
-To visualize our results, his is a line graph showing the growth in median life expectancy by continent. It plots the We observe that Oceania maintains the highest median life expectancy, but also very high growth in Asia, to almost catch up to the Americas.
+To visualize our results, @fig-lifeexp-trend is a line graph showing the growth in median life expectancy by continent. It plots the median life expectancy of each continent at every survey year from 1952 to 2007. We observe that Oceania maintains the highest median life expectancy throughout, while Asia shows very high growth, almost catching up to the Americas by 2007.
+
+## Conclusion
+
+Asia had the largest increase in median life expectancy between 1952 and
+2007, gaining about 27.5 years. The Americas followed with about 18 years,
+then Africa (14), Europe (13), and Oceania (11.5).
